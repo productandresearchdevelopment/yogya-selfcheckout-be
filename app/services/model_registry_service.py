@@ -131,6 +131,80 @@ def ensure_baseline_models_registered(db: Session):
         db.add(dino_b_baseline)
         db.commit()
 
+    # 1d. DINOv3 ViT-S Baseline Registration
+    dino3_s_baseline = (
+        db.query(ModelRegistry)
+        .filter(ModelRegistry.model_id == "dinov3-vits16-baseline")
+        .first()
+    )
+    if not dino3_s_baseline:
+        has_dinov3_access = bool(os.getenv("DINOV3_CHECKPOINT_PATH") or os.getenv("HF_TOKEN"))
+        dino3_s_baseline = ModelRegistry(
+            model_id="dinov3-vits16-baseline",
+            model_type="embedding",
+            architecture="DINOv3-ViT-S/16 (Meta Self-Supervised Vision Transformer)",
+            pretrained_source="Meta DINOv3 (facebook/dinov3-vits16-pretrain-lvd1689m)",
+            weight_version="Meta Pretrained Self-Supervised LVD-1689M",
+            embedding_dim=384,
+            checkpoint_path=None,
+            hyperparameters_json=json.dumps({
+                "backbone": "dinov3_vits16",
+                "patch_size": 16,
+                "image_size": 224,
+                "embedding_dim": 384,
+                "pooling": "CLS token",
+                "normalization": "L2",
+                "description": "Meta DINOv3 Vision Transformer Small. Gated weights require license agreement or DINOV3_CHECKPOINT_PATH.",
+            }),
+            metrics_json=json.dumps({
+                "domain": "LVD-1689M foundation dataset",
+                "embedding_dim": 384,
+                "gated_status": "AUTHENTICATED" if has_dinov3_access else "BLOCKED_GATED_LICENSE_REQUIRED",
+            }),
+            status="ready" if has_dinov3_access else "gated_license_required",
+            is_active=False,
+            license="Meta DINOv3 License Agreement",
+        )
+        db.add(dino3_s_baseline)
+        db.commit()
+
+    # 1e. DINOv3 ViT-B Baseline Registration
+    dino3_b_baseline = (
+        db.query(ModelRegistry)
+        .filter(ModelRegistry.model_id == "dinov3-vitb16-baseline")
+        .first()
+    )
+    if not dino3_b_baseline:
+        has_dinov3_access = bool(os.getenv("DINOV3_CHECKPOINT_PATH") or os.getenv("HF_TOKEN"))
+        dino3_b_baseline = ModelRegistry(
+            model_id="dinov3-vitb16-baseline",
+            model_type="embedding",
+            architecture="DINOv3-ViT-B/16 (Meta Self-Supervised Vision Transformer)",
+            pretrained_source="Meta DINOv3 (facebook/dinov3-vitb16-pretrain-lvd1689m)",
+            weight_version="Meta Pretrained Self-Supervised LVD-1689M",
+            embedding_dim=768,
+            checkpoint_path=None,
+            hyperparameters_json=json.dumps({
+                "backbone": "dinov3_vitb16",
+                "patch_size": 16,
+                "image_size": 224,
+                "embedding_dim": 768,
+                "pooling": "CLS token",
+                "normalization": "L2",
+                "description": "Meta DINOv3 Vision Transformer Base. Gated weights require license agreement or DINOV3_CHECKPOINT_PATH.",
+            }),
+            metrics_json=json.dumps({
+                "domain": "LVD-1689M foundation dataset",
+                "embedding_dim": 768,
+                "gated_status": "AUTHENTICATED" if has_dinov3_access else "BLOCKED_GATED_LICENSE_REQUIRED",
+            }),
+            status="ready" if has_dinov3_access else "gated_license_required",
+            is_active=False,
+            license="Meta DINOv3 License Agreement",
+        )
+        db.add(dino3_b_baseline)
+        db.commit()
+
     # 2. Detector Model Baseline
     det_baseline = (
         db.query(ModelRegistry)
@@ -201,9 +275,11 @@ def load_model_instance(model_record: ModelRegistry) -> Any:
         model, device, transform = get_embedder()
         return model, device, transform
 
-    if "dino" in model_record.model_id.lower():
+    if "dino" in model_record.model_id.lower() and not model_record.checkpoint_path:
         from app.services.embedder import get_dino_embedder
         variant = "dinov2_vitb14" if "vitb" in model_record.model_id.lower() else "dinov2_vits14"
+        if "dinov3" in model_record.model_id.lower():
+            variant = "dinov3_vitb16" if "vitb" in model_record.model_id.lower() else "dinov3_vits16"
         model, device, transform = get_dino_embedder(variant=variant)
         return model, device, transform
 
@@ -218,9 +294,14 @@ def load_model_instance(model_record: ModelRegistry) -> Any:
 
     device = get_torch_device()
     checkpoint = torch.load(model_record.checkpoint_path, map_location=device)
+    backbone_type = checkpoint.get("backbone_type") or (
+        "dinov2_vits14" if "dinov2" in model_record.model_id.lower()
+        else ("dinov3_vits16" if "dinov3" in model_record.model_id.lower() else "mobilenetv3")
+    )
 
     model = MetricEmbeddingModel(
         embedding_dim=model_record.embedding_dim,
+        backbone_type=backbone_type,
         freeze_backbone=False,
     )
     model.load_state_dict(checkpoint["model_state_dict"])

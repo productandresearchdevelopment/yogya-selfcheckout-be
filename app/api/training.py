@@ -78,7 +78,7 @@ def start_training_job(
 
     new_job = TrainingJob(
         job_id=job_id,
-        model_id=f"mobilenetv3-metric-{job_id}",
+        model_id=f"{req.backbone_type}-metric-{job_id}",
         status="QUEUED",
         total_epochs=req.epochs,
         current_epoch=0,

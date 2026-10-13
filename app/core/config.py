@@ -62,11 +62,16 @@ DATABASE_URL = URL.create(
 )
 
 # Recognition Defaults
-DEFAULT_DETECTION_CONFIDENCE_THRESHOLD = 0.35
-DEFAULT_SIMILARITY_THRESHOLD = 0.60
-DEFAULT_TOP_K = 5
+DEFAULT_DETECTION_CONFIDENCE_THRESHOLD = float(os.getenv("DEFAULT_DETECTION_CONFIDENCE_THRESHOLD", "0.35"))
+DEFAULT_SIMILARITY_THRESHOLD = float(os.getenv("DEFAULT_SIMILARITY_THRESHOLD", "0.60"))
+DEFAULT_MARGIN_THRESHOLD = float(os.getenv("DEFAULT_MARGIN_THRESHOLD", "0.08"))
+DEFAULT_TOP_K = int(os.getenv("DEFAULT_TOP_K", "5"))
 
 # Baseline Model Names
 DETECTOR_MODEL_NAME = "fasterrcnn_mobilenet_v3_large_fpn"
 EMBEDDING_MODEL_NAME = "mobilenet_v3_large"
 EMBEDDING_DIM = 960  # MobileNetV3-Large feature dim before classification head
+
+# DINO Configuration
+DINOV3_CHECKPOINT_PATH = os.getenv("DINOV3_CHECKPOINT_PATH")
+HF_TOKEN = os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_HUB_TOKEN")

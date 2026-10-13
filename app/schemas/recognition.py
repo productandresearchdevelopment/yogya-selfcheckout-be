@@ -28,14 +28,15 @@ class DetectedObject(BaseModel):
 
     detector_confidence: float = Field(..., description="Localization model confidence score [0.0, 1.0]")
     detector_class: str = Field(..., description="Class name from detection backbone")
+    crop_provenance: str = Field("detector_roi", description="Provenance: detector_roi, adaptive_saliency_roi, or fallback_full_frame")
     is_fallback: bool = Field(False, description="True if whole image or center frame fallback was used")
 
     crop_image_url: Optional[str] = None
 
     # Recognition results
     is_unknown: bool = Field(..., description="True if no candidate met the acceptance threshold or rules")
-    recognition_status: str = Field("UNKNOWN", description="Decision status: KNOWN, UNKNOWN, or UNCLASSIFIED")
-    predicted_sku: Optional[str] = Field(None, description="SKU code or UNKNOWN")
+    recognition_status: str = Field("UNKNOWN", description="Decision status: KNOWN, UNKNOWN, AMBIGUOUS, NO_OBJECTS_DETECTED, or UNCLASSIFIED")
+    predicted_sku: Optional[str] = Field(None, description="SKU code or UNKNOWN or AMBIGUOUS")
     predicted_sku_name: Optional[str] = None
     top_similarity_score: Optional[float] = Field(None, description="Highest candidate cosine similarity score")
     margin_threshold: Optional[float] = Field(None, description="Top-1 vs top-2 required margin threshold")

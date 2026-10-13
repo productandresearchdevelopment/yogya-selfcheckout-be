@@ -22,6 +22,7 @@ from app.schemas.sku import (
 from app.services.dataset_service import compute_file_hash, inspect_image_quality
 from app.services.model_registry_service import get_active_model
 from app.services.embedder import BaselineEmbedder
+from app.services.gallery import invalidate_gallery_cache
 
 router = APIRouter(prefix="/skus", tags=["SKUs"])
 
@@ -206,6 +207,7 @@ async def enroll_sku_few_shot(
 
         db.commit()
         db.refresh(new_sku)
+        invalidate_gallery_cache()
 
     except HTTPException:
         db.rollback()
@@ -284,6 +286,7 @@ def update_sku(sku_id: int, sku_update: SKUUpdate, db: Session = Depends(get_db)
 
     db.commit()
     db.refresh(sku)
+    invalidate_gallery_cache()
     return _build_sku_response(sku, db)
 
 
@@ -297,6 +300,7 @@ def deactivate_sku(sku_id: int, db: Session = Depends(get_db)):
     sku.is_active = False
     db.commit()
     db.refresh(sku)
+    invalidate_gallery_cache()
     return _build_sku_response(sku, db)
 
 
@@ -309,6 +313,7 @@ def delete_sku(sku_id: int, db: Session = Depends(get_db)):
 
     db.delete(sku)
     db.commit()
+    invalidate_gallery_cache()
     return {"status": "success", "message": f"SKU {sku_id} deleted successfully."}
 
 

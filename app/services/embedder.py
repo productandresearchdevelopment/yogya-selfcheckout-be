@@ -169,6 +169,8 @@ class BaselineEmbedder:
         if self._model is None:
             if "dino" in self.model_id.lower():
                 variant = "dinov2_vitb14" if "vitb" in self.model_id.lower() else "dinov2_vits14"
+                if "dinov3" in self.model_id.lower():
+                    variant = "dinov3_vitb16" if "vitb" in self.model_id.lower() else "dinov3_vits16"
                 self._model, self._device, self._transform = get_dino_embedder(variant=variant)
                 self._embedding_dim = 768 if "vitb" in self.model_id.lower() else 384
             else:

@@ -326,9 +326,9 @@ class GalleryService:
                 )
                 return {
                     "is_unknown": True,
-                    "recognition_status": "UNKNOWN",
-                    "predicted_sku": "UNKNOWN",
-                    "predicted_sku_name": f"UNKNOWN (Ambiguous Margin vs {candidates[1]['sku_code']})",
+                    "recognition_status": "AMBIGUOUS",
+                    "predicted_sku": "AMBIGUOUS",
+                    "predicted_sku_name": f"AMBIGUOUS (Close Match: {top_candidate['sku_code']} vs {candidates[1]['sku_code']})",
                     "top_similarity_score": top_score,
                     "margin_threshold": margin_threshold,
                     "margin_delta": margin_delta,

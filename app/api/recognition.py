@@ -14,6 +14,7 @@ from app.core.config import (
     CROPPED_IMAGES_DIR,
     DEFAULT_DETECTION_CONFIDENCE_THRESHOLD,
     DEFAULT_SIMILARITY_THRESHOLD,
+    DEFAULT_MARGIN_THRESHOLD,
     DEFAULT_TOP_K,
     DETECTOR_MODEL_NAME,
     EMBEDDING_MODEL_NAME,
@@ -77,9 +78,9 @@ def execute_recognition_pipeline(
     )
 
     detected_objects: List[DetectedObject] = []
-    overall_status = "UNKNOWN"
+    overall_status = "UNKNOWN" if len(raw_detections) > 0 else "NO_OBJECTS_DETECTED"
     top_overall_sku = None
-    top_overall_sim = -1.0
+    top_overall_sim = 0.0 if len(raw_detections) == 0 else -1.0
 
     # High-Performance Batch Optimization: Load all crops and extract embeddings in a single neural forward pass
     loaded_crops: List[Image.Image] = []
@@ -107,6 +108,7 @@ def execute_recognition_pipeline(
             print(f"Warning: Batched embedding failed ({batch_err}), falling back to per-crop inference.")
             batched_vectors = None
 
+    has_ambiguous = False
     for idx, obj in enumerate(raw_detections):
         try:
             if batched_vectors is not None and idx in valid_obj_indices:
@@ -142,6 +144,9 @@ def execute_recognition_pipeline(
             margin_delta = search_result.get("margin_delta")
             rejection_reason = search_result.get("rejection_reason")
 
+            if rec_status == "AMBIGUOUS":
+                has_ambiguous = True
+
             if not is_unknown and overall_status != "MATCHED":
                 overall_status = "MATCHED"
 
@@ -164,6 +169,7 @@ def execute_recognition_pipeline(
                     px_height=obj["px_height"],
                     detector_confidence=obj["detector_confidence"],
                     detector_class=obj["detector_class"],
+                    crop_provenance=obj.get("crop_provenance", "detector_roi"),
                     is_fallback=obj["is_fallback"],
                     crop_image_url=crop_url,
                     is_unknown=is_unknown,
@@ -192,8 +198,9 @@ def execute_recognition_pipeline(
                     px_height=obj["px_height"],
                     detector_confidence=obj["detector_confidence"],
                     detector_class=obj["detector_class"],
+                    crop_provenance=obj.get("crop_provenance", "fallback_full_frame"),
                     is_fallback=obj["is_fallback"],
-                    crop_image_url=f"/api/v1/datasets/crops/{obj['crop_filename']}",
+                    crop_image_url=f"/api/v1/datasets/crops/{obj['crop_filename']}" if obj.get("crop_filename") else None,
                     is_unknown=True,
                     recognition_status="UNCLASSIFIED",
                     predicted_sku="UNCLASSIFIED",
@@ -205,6 +212,9 @@ def execute_recognition_pipeline(
                     candidates=[],
                 )
             )
+
+    if overall_status == "UNKNOWN" and has_ambiguous:
+        overall_status = "AMBIGUOUS"
 
     return (
         detected_objects,
@@ -251,7 +261,7 @@ async def recognize_products(
     confidence_threshold: float = Form(DEFAULT_DETECTION_CONFIDENCE_THRESHOLD),
     similarity_threshold: float = Form(DEFAULT_SIMILARITY_THRESHOLD),
     top_k: int = Form(DEFAULT_TOP_K),
-    margin_threshold: float = Form(0.0),
+    margin_threshold: float = Form(DEFAULT_MARGIN_THRESHOLD),
     min_crop_size: int = Form(10),
     allow_fallback: bool = Form(True),
     db: Session = Depends(get_db),
@@ -352,7 +362,7 @@ async def recognize_webcam_frame(
     confidence_threshold: float = Form(DEFAULT_DETECTION_CONFIDENCE_THRESHOLD),
     similarity_threshold: float = Form(DEFAULT_SIMILARITY_THRESHOLD),
     top_k: int = Form(DEFAULT_TOP_K),
-    margin_threshold: float = Form(0.0),
+    margin_threshold: float = Form(DEFAULT_MARGIN_THRESHOLD),
     min_crop_size: int = Form(10),
     allow_fallback: bool = Form(False),
     frame_seq: Optional[int] = Form(None),
@@ -414,7 +424,7 @@ async def recognize_webcam_frame(
         obj for obj in detected_objects
         if not obj.is_unknown
         and obj.predicted_sku
-        and obj.predicted_sku != "UNKNOWN"
+        and obj.predicted_sku not in ("UNKNOWN", "AMBIGUOUS")
         and obj.detector_confidence >= confidence_threshold
         and (obj.top_similarity_score or 0.0) >= similarity_threshold
     ]

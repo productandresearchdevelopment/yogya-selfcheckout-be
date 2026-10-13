@@ -32,31 +32,69 @@ ACTIVE_CANCELLATIONS: Dict[str, bool] = {}
 class MetricEmbeddingModel(nn.Module):
     """
     Deep Metric Learning visual feature embedding model.
-    Backbone: Pretrained MobileNetV3-Large (960 features)
+    Backbone: Pretrained MobileNetV3-Large (960 features) or Meta DINO (384 / 768 features)
     Head: 2-layer projection head with BatchNorm, Hardswish, Dropout, and L2 normalization.
     """
 
-    def __init__(self, embedding_dim: int = 512, freeze_backbone: bool = True):
+    def __init__(
+        self,
+        embedding_dim: int = 512,
+        backbone_type: str = "mobilenetv3",
+        freeze_backbone: bool = True,
+    ):
         super().__init__()
-        weights = MobileNet_V3_Large_Weights.DEFAULT
-        self.backbone = mobilenet_v3_large(weights=weights)
-        self.backbone.classifier = nn.Identity()
+        self.backbone_type = backbone_type.lower()
+        self.embedding_dim = embedding_dim
+        self.freeze_backbone = freeze_backbone
+
+        if "dino" in self.backbone_type:
+            from app.services.embedder import get_dino_embedder
+            variant = (
+                "dinov2_vitb14" if "vitb" in self.backbone_type
+                else "dinov2_vits14"
+            )
+            if "dinov3" in self.backbone_type:
+                variant = "dinov3_vitb16" if "vitb" in self.backbone_type else "dinov3_vits16"
+
+            try:
+                base_model, _, _ = get_dino_embedder(variant=variant)
+                self.backbone = base_model
+            except Exception:
+                # Fallback to local architecture initialization if gated weights are unauthenticated
+                import sys, importlib
+                hub_dir = os.path.expanduser("~/.cache/torch/hub/facebookresearch_dinov3_main")
+                if os.path.exists(hub_dir) and hub_dir not in sys.path:
+                    sys.path.insert(0, hub_dir)
+                backbones = importlib.import_module("dinov3.hub.backbones")
+                arch_func = getattr(backbones, variant, getattr(backbones, "dinov3_vits16"))
+                self.backbone = arch_func(pretrained=False)
+
+            in_dim = 768 if "vitb" in self.backbone_type else 384
+        else:
+            weights = MobileNet_V3_Large_Weights.DEFAULT
+            self.backbone = mobilenet_v3_large(weights=weights)
+            self.backbone.classifier = nn.Identity()
+            in_dim = 960
 
         if freeze_backbone:
             for param in self.backbone.parameters():
                 param.requires_grad = False
 
+        self.in_dim = in_dim
         self.projection_head = nn.Sequential(
-            nn.Linear(960, 512),
+            nn.Linear(in_dim, 512),
             nn.BatchNorm1d(512),
             nn.Hardswish(),
             nn.Dropout(p=0.15),
             nn.Linear(512, embedding_dim),
         )
-        self.embedding_dim = embedding_dim
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         features = self.backbone(x)
+        if features.ndim > 2:
+            features = features.view(features.size(0), -1)
+        elif features.ndim == 1:
+            features = features.unsqueeze(0)
         projected = self.projection_head(features)
         # L2 normalize so cosine similarity equals inner product
         normalized = F.normalize(projected, p=2, dim=-1)
@@ -376,8 +414,15 @@ def _run_training_pipeline(
     train_loader = DataLoader(train_dataset, batch_sampler=train_sampler)
     val_loader = DataLoader(val_dataset, batch_size=min(8, max(1, len(val_dataset))), shuffle=False)
 
+    backbone_type = config.get("backbone_type", "mobilenetv3").lower()
+    freeze_backbone = bool(config.get("freeze_backbone", True))
+
     # Initialize Model
-    model = MetricEmbeddingModel(embedding_dim=embedding_dim, freeze_backbone=True)
+    model = MetricEmbeddingModel(
+        embedding_dim=embedding_dim,
+        backbone_type=backbone_type,
+        freeze_backbone=freeze_backbone,
+    )
     model.to(device)
 
     criterion = CosineTripletLoss(margin=margin)
@@ -485,6 +530,7 @@ def _run_training_pipeline(
         torch.save(
             {
                 "epoch": epoch,
+                "backbone_type": backbone_type,
                 "model_state_dict": model.state_dict(),
                 "optimizer_state_dict": optimizer.state_dict(),
                 "embedding_dim": embedding_dim,
@@ -523,12 +569,12 @@ def _run_training_pipeline(
             db.commit()
 
             # Create a model version entry in the ModelRegistry (ready for evaluation/activation, but not auto-activated!)
-            model_version_id = f"mobilenetv3-metric-{job_id}"
+            model_version_id = f"{backbone_type}-metric-{job_id}"
             reg_entry = ModelRegistry(
                 model_id=model_version_id,
                 model_type="embedding",
-                architecture=f"MobileNetV3-Large + MetricProjectionHead({embedding_dim})",
-                pretrained_source="torchvision.models.mobilenet_v3_large(weights=MobileNet_V3_Large_Weights.DEFAULT)",
+                architecture=f"{backbone_type} + MetricProjectionHead({embedding_dim})",
+                pretrained_source=f"MetricLearning({backbone_type})",
                 weight_version=f"Job-{job_id}-Best",
                 embedding_dim=embedding_dim,
                 checkpoint_path=best_checkpoint_path,
@@ -540,7 +586,7 @@ def _run_training_pipeline(
                 }),
                 status="ready",
                 is_active=False,  # DO NOT overwrite active model automatically
-                license="BSD-3-Clause",
+                license="Apache-2.0" if "dino" in backbone_type else "BSD-3-Clause",
             )
             db.add(reg_entry)
             db.commit()

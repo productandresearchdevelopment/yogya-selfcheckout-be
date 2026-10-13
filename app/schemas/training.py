@@ -43,12 +43,20 @@ class DatasetReadinessResponse(BaseModel):
 
 
 class StartTrainingRequest(BaseModel):
+    backbone_type: str = Field(
+        default="mobilenetv3",
+        description="Backbone architecture: 'mobilenetv3', 'dinov2_vits14', 'dinov2_vitb14', 'dinov3_vits16', 'dinov3_vitb16'",
+    )
     epochs: int = Field(default=5, ge=1, le=50)
     embedding_dim: int = Field(default=512, ge=128, le=1024)
     learning_rate: float = Field(default=0.0001, ge=1e-6, le=0.01)
     margin: float = Field(default=0.2, ge=0.01, le=1.0)
     p_classes: int = Field(default=2, ge=2, le=8)
     k_instances: int = Field(default=2, ge=2, le=8)
+    freeze_backbone: bool = Field(
+        default=True,
+        description="Whether to freeze backbone weights and fine-tune only the projection head",
+    )
 
 
 class TrainingJobResponse(BaseModel):
