@@ -56,15 +56,16 @@ class BaselineDetector:
 
     def detect_and_crop(
         self,
-        image_path: str,
+        image_path_or_pil: Any,
         confidence_threshold: float = None,
         allow_fallback: bool = True,
         min_crop_size: int = 10,
+        save_crops: bool = False,
     ) -> Tuple[List[Dict[str, Any]], bool, List[str]]:
         """
         Runs object detection on the image.
         Returns:
-            - List of detected objects with bounding boxes, scores, and crop paths.
+            - List of detected objects with bounding boxes, scores, and crop paths/images.
             - Boolean flag indicating whether fallback was required.
             - List of warnings / notes.
         """
@@ -74,7 +75,10 @@ class BaselineDetector:
         thresh = confidence_threshold if confidence_threshold is not None else self.confidence_threshold
         warnings: List[str] = []
 
-        pil_img = Image.open(image_path).convert("RGB")
+        if isinstance(image_path_or_pil, Image.Image):
+            pil_img = image_path_or_pil.convert("RGB")
+        else:
+            pil_img = Image.open(str(image_path_or_pil)).convert("RGB")
         img_w, img_h = pil_img.size
 
         model, device = get_detector()
@@ -118,9 +122,12 @@ class BaselineDetector:
 
             # Extract crop
             crop = pil_img.crop((x1, y1, x2, y2))
-            crop_filename = f"crop_{uuid.uuid4().hex[:12]}_{box_idx}.jpg"
-            crop_path = CROPPED_IMAGES_DIR / crop_filename
-            crop.save(crop_path, quality=95)
+            crop_filename = None
+            crop_path = None
+            if save_crops:
+                crop_filename = f"crop_{uuid.uuid4().hex[:12]}_{box_idx}.jpg"
+                crop_path = CROPPED_IMAGES_DIR / crop_filename
+                crop.save(crop_path, quality=95)
 
             detected_objects.append({
                 "box_id": box_idx,
@@ -135,7 +142,8 @@ class BaselineDetector:
                 "detector_confidence": round(float(score), 4),
                 "detector_class": class_name,
                 "is_fallback": False,
-                "crop_path": str(crop_path),
+                "crop_img": crop,
+                "crop_path": str(crop_path) if crop_path else None,
                 "crop_filename": crop_filename,
             })
             box_idx += 1
@@ -151,9 +159,12 @@ class BaselineDetector:
                 f"Using full-frame fallback crop for baseline evaluation."
             )
 
-            fallback_crop_filename = f"crop_fallback_{uuid.uuid4().hex[:12]}.jpg"
-            fallback_crop_path = CROPPED_IMAGES_DIR / fallback_crop_filename
-            pil_img.save(fallback_crop_path, quality=95)
+            fallback_crop_filename = None
+            fallback_crop_path = None
+            if save_crops:
+                fallback_crop_filename = f"crop_fallback_{uuid.uuid4().hex[:12]}.jpg"
+                fallback_crop_path = CROPPED_IMAGES_DIR / fallback_crop_filename
+                pil_img.save(fallback_crop_path, quality=95)
 
             detected_objects.append({
                 "box_id": 0,
@@ -168,7 +179,8 @@ class BaselineDetector:
                 "detector_confidence": 0.0,
                 "detector_class": "fallback_full_frame",
                 "is_fallback": True,
-                "crop_path": str(fallback_crop_path),
+                "crop_img": pil_img,
+                "crop_path": str(fallback_crop_path) if fallback_crop_path else None,
                 "crop_filename": fallback_crop_filename,
             })
 

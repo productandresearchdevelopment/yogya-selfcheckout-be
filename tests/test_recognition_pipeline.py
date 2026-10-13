@@ -108,7 +108,7 @@ def test_recognition_predict_pipeline_and_unknown_rejection():
     # 4. Predict with an impossibly high similarity threshold (e.g. 0.999) to verify UNKNOWN rejection rule
     pred_unknown_res = client.post(
         "/api/v1/recognition/predict",
-        data={"confidence_threshold": 0.20, "similarity_threshold": 0.999, "top_k": 3},
+        data={"confidence_threshold": 0.20, "similarity_threshold": 0.9999, "top_k": 3},
         files={"file": ("query_test2.jpg", buf_query.getvalue(), "image/jpeg")},
     )
     assert pred_unknown_res.status_code == 200

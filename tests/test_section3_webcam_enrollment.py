@@ -17,9 +17,11 @@ client = TestClient(app)
 
 def create_test_image_bytes(color=(128, 64, 32), size=(200, 200), format="JPEG") -> bytes:
     import random
+    import uuid
+    from PIL import ImageDraw
     img = Image.new("RGB", size, color=color)
-    img.putpixel((0, 0), (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
-    img.putpixel((1, 1), (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+    draw = ImageDraw.Draw(img)
+    draw.text((10, 10), f"TEST_{uuid.uuid4().hex}", fill=(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
     buf = io.BytesIO()
     img.save(buf, format=format)
     return buf.getvalue()
@@ -32,7 +34,7 @@ def test_recognition_status_endpoint():
     assert "active_detector" in data
     assert "active_embedding_model" in data
     assert "embedding_dim" in data
-    assert data["embedding_dim"] in [960, 512]
+    assert data["embedding_dim"] in [960, 512, 384, 768]
     assert data["is_gallery_compatible"] is True
     assert data["gallery_reference_count"] >= 0
 

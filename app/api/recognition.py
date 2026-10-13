@@ -1,4 +1,5 @@
 import os
+import io
 import time
 import json
 import uuid
@@ -56,13 +57,14 @@ def get_active_embedder(db: Session) -> Tuple[BaselineEmbedder, str, int]:
 
 def execute_recognition_pipeline(
     db: Session,
-    image_path: str,
+    image_path: Any,
     confidence_threshold: float,
     similarity_threshold: float,
     top_k: int,
     margin_threshold: float = 0.0,
     min_crop_size: int = 10,
     allow_fallback: bool = True,
+    save_crops: bool = False,
 ) -> Tuple[List[DetectedObject], str, Optional[str], float, bool, List[str], str, str]:
     active_embedder, active_model_id, embedding_dim = get_active_embedder(db)
 
@@ -71,6 +73,7 @@ def execute_recognition_pipeline(
         confidence_threshold=confidence_threshold,
         allow_fallback=allow_fallback,
         min_crop_size=min_crop_size,
+        save_crops=save_crops,
     )
 
     detected_objects: List[DetectedObject] = []
@@ -83,13 +86,17 @@ def execute_recognition_pipeline(
     valid_obj_indices: List[int] = []
 
     for idx, obj in enumerate(raw_detections):
-        crop_path = obj["crop_path"]
-        try:
-            with Image.open(crop_path) as crop_img:
-                loaded_crops.append(crop_img.convert("RGB"))
-                valid_obj_indices.append(idx)
-        except Exception:
-            pass
+        crop_img = obj.get("crop_img")
+        if crop_img is not None:
+            loaded_crops.append(crop_img.convert("RGB"))
+            valid_obj_indices.append(idx)
+        elif obj.get("crop_path"):
+            try:
+                with Image.open(obj["crop_path"]) as c_img:
+                    loaded_crops.append(c_img.convert("RGB"))
+                    valid_obj_indices.append(idx)
+            except Exception:
+                pass
 
     # Single batched forward pass through active embedder
     batched_vectors = None
@@ -101,14 +108,19 @@ def execute_recognition_pipeline(
             batched_vectors = None
 
     for idx, obj in enumerate(raw_detections):
-        crop_path = obj["crop_path"]
         try:
             if batched_vectors is not None and idx in valid_obj_indices:
                 crop_idx = valid_obj_indices.index(idx)
                 crop_vector = batched_vectors[crop_idx]
             else:
-                with Image.open(crop_path) as crop_img:
+                crop_img = obj.get("crop_img")
+                if crop_img is not None:
                     crop_vector = active_embedder.extract_embedding_from_crop(crop_img)
+                elif obj.get("crop_path"):
+                    with Image.open(obj["crop_path"]) as c_img:
+                        crop_vector = active_embedder.extract_embedding_from_crop(c_img)
+                else:
+                    continue
 
             search_result = gallery_service.search_candidates(
                 db,
@@ -137,6 +149,8 @@ def execute_recognition_pipeline(
                 top_overall_sim = top_sim
                 top_overall_sku = pred_sku
 
+            crop_url = f"/api/v1/datasets/crops/{obj['crop_filename']}" if obj.get("crop_filename") else None
+
             detected_objects.append(
                 DetectedObject(
                     box_id=obj["box_id"],
@@ -151,7 +165,7 @@ def execute_recognition_pipeline(
                     detector_confidence=obj["detector_confidence"],
                     detector_class=obj["detector_class"],
                     is_fallback=obj["is_fallback"],
-                    crop_image_url=f"/api/v1/datasets/crops/{obj['crop_filename']}",
+                    crop_image_url=crop_url,
                     is_unknown=is_unknown,
                     recognition_status=rec_status,
                     predicted_sku=pred_sku,
@@ -359,50 +373,35 @@ async def recognize_webcam_frame(
     if len(file_bytes) == 0:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Webcam frame payload is empty.")
 
-    temp_frame_name = f"webcam_tmp_{uuid.uuid4().hex[:8]}.jpg"
-    temp_frame_path = CROPPED_IMAGES_DIR / temp_frame_name
-
-    with open(temp_frame_path, "wb") as f:
-        f.write(file_bytes)
-
     try:
-        with Image.open(temp_frame_path) as img:
-            img_w, img_h = img.size
+        pil_frame = Image.open(io.BytesIO(file_bytes)).convert("RGB")
+        img_w, img_h = pil_frame.size
     except Exception as e:
-        if os.path.exists(temp_frame_path):
-            os.remove(temp_frame_path)
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Corrupt or invalid webcam frame: {str(e)}",
         )
 
-    try:
-        (
-            detected_objects,
-            overall_status,
-            top_overall_sku,
-            top_overall_sim,
-            is_fallback,
-            warnings,
-            detector_name,
-            embedding_name,
-        ) = execute_recognition_pipeline(
-            db=db,
-            image_path=str(temp_frame_path),
-            confidence_threshold=confidence_threshold,
-            similarity_threshold=similarity_threshold,
-            top_k=top_k,
-            margin_threshold=margin_threshold,
-            min_crop_size=min_crop_size,
-            allow_fallback=allow_fallback,
-        )
-    finally:
-        # Clean up temporary frame
-        if os.path.exists(temp_frame_path):
-            try:
-                os.remove(temp_frame_path)
-            except Exception:
-                pass
+    (
+        detected_objects,
+        overall_status,
+        top_overall_sku,
+        top_overall_sim,
+        is_fallback,
+        warnings,
+        detector_name,
+        embedding_name,
+    ) = execute_recognition_pipeline(
+        db=db,
+        image_path=pil_frame,
+        confidence_threshold=confidence_threshold,
+        similarity_threshold=similarity_threshold,
+        top_k=top_k,
+        margin_threshold=margin_threshold,
+        min_crop_size=min_crop_size,
+        allow_fallback=allow_fallback,
+        save_crops=False,
+    )
 
     duration_ms = round((time.time() - start_time) * 1000, 2)
 
@@ -421,7 +420,7 @@ async def recognize_webcam_frame(
     ]
 
     return RecognitionResponse(
-        query_image_name=temp_frame_name,
+        query_image_name=f"webcam_frame_{frame_seq or uuid.uuid4().hex[:8]}",
         query_image_url="",
         image_width=img_w,
         image_height=img_h,

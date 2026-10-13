@@ -248,6 +248,46 @@
       "id": 76,
       "name": "TEST-DRINK-DDEFDA",
       "supercategory": "product"
+    },
+    {
+      "id": 77,
+      "name": "GOLDA-COFFE",
+      "supercategory": "product"
+    },
+    {
+      "id": 78,
+      "name": "MINERAL-WATER",
+      "supercategory": "product"
+    },
+    {
+      "id": 79,
+      "name": "TEST-CHOCO-C786E8",
+      "supercategory": "product"
+    },
+    {
+      "id": 80,
+      "name": "TEST-CHOCO-1F1911",
+      "supercategory": "product"
+    },
+    {
+      "id": 81,
+      "name": "TEST-CHOCO-044FEA",
+      "supercategory": "product"
+    },
+    {
+      "id": 82,
+      "name": "TEST-CHOCO-97BAE6",
+      "supercategory": "product"
+    },
+    {
+      "id": 84,
+      "name": "FEWSHOT_C98EE3",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 86,
+      "name": "TEST-DRINK-C50211",
+      "supercategory": "product"
     }
   ],
   "images": [
@@ -2210,6 +2250,150 @@
       "height": 300,
       "split": "reference",
       "sku_id": 76
+    },
+    {
+      "id": 259,
+      "file_name": "GOLDA-COFFE_reference_a5692e19bb.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 77
+    },
+    {
+      "id": 260,
+      "file_name": "GOLDA-COFFE_reference_0896991385.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 77
+    },
+    {
+      "id": 261,
+      "file_name": "GOLDA-COFFE_reference_a54a9f97d9.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 77
+    },
+    {
+      "id": 262,
+      "file_name": "GOLDA-COFFE_reference_9430d52588.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 77
+    },
+    {
+      "id": 263,
+      "file_name": "GOLDA-COFFE_reference_0d26f700b4.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 77
+    },
+    {
+      "id": 264,
+      "file_name": "MINERAL-WATER_reference_0186cccb60.jpg",
+      "width": 640,
+      "height": 480,
+      "split": "reference",
+      "sku_id": 78
+    },
+    {
+      "id": 265,
+      "file_name": "MINERAL-WATER_reference_d44d99649c.jpg",
+      "width": 640,
+      "height": 480,
+      "split": "reference",
+      "sku_id": 78
+    },
+    {
+      "id": 266,
+      "file_name": "MINERAL-WATER_reference_a352326e81.jpg",
+      "width": 640,
+      "height": 480,
+      "split": "reference",
+      "sku_id": 78
+    },
+    {
+      "id": 267,
+      "file_name": "MINERAL-WATER_reference_05586ffd1a.jpg",
+      "width": 640,
+      "height": 480,
+      "split": "reference",
+      "sku_id": 78
+    },
+    {
+      "id": 268,
+      "file_name": "MINERAL-WATER_reference_fd2341e746.jpg",
+      "width": 640,
+      "height": 480,
+      "split": "reference",
+      "sku_id": 78
+    },
+    {
+      "id": 269,
+      "file_name": "TEST-CHOCO-C786E8_reference_5d3282a8d4.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 79
+    },
+    {
+      "id": 270,
+      "file_name": "TEST-CHOCO-1F1911_reference_bafbcd5933.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 80
+    },
+    {
+      "id": 271,
+      "file_name": "TEST-CHOCO-044FEA_reference_de0a96a598.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 81
+    },
+    {
+      "id": 272,
+      "file_name": "TEST-CHOCO-97BAE6_reference_e676846c7b.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 82
+    },
+    {
+      "id": 274,
+      "file_name": "FEWSHOT_C98EE3_ref_4d09392edb.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 84
+    },
+    {
+      "id": 275,
+      "file_name": "FEWSHOT_C98EE3_ref_6ab782178c.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 84
+    },
+    {
+      "id": 276,
+      "file_name": "hardneg_59_tmpr2z07aim.jpg",
+      "width": 100,
+      "height": 100,
+      "split": "train",
+      "sku_id": null
+    },
+    {
+      "id": 277,
+      "file_name": "TEST-DRINK-C50211_reference_fca291e620.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 86
     }
   ],
   "annotations": [
@@ -2441,6 +2625,21 @@
     {
       "id": 16,
       "image_id": 258,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 17,
+      "image_id": 277,
       "category_id": 2,
       "bbox": [
         45,
