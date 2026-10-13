@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+.venv/
+venv/
+ENV/
+
+# Environment Variables & Credentials
+.env
+.env.local
+
+# Testing & Cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Storage, Models & Checkpoints
+storage/checkpoints/*.pt
+storage/checkpoints/*.pth
+storage/models/*.pt
+storage/models/*.pth
+storage/backups/
+storage/logs/
+storage/temp/
+storage/*.db
+storage/*.sqlite3
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

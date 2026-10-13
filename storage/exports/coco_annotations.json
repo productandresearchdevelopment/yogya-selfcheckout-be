@@ -1,0 +1,2457 @@
+{
+  "info": {
+    "description": "Product Recognition Studio COCO Dataset Export",
+    "version": "1.0"
+  },
+  "categories": [
+    {
+      "id": 2,
+      "name": "TEST-DRINK-002",
+      "supercategory": "product"
+    },
+    {
+      "id": 3,
+      "name": "TEST-CHOCO-BAR",
+      "supercategory": "product"
+    },
+    {
+      "id": 5,
+      "name": "TEST-DRINK-A024BD",
+      "supercategory": "product"
+    },
+    {
+      "id": 6,
+      "name": "TEST-CHOCO-FB66C4",
+      "supercategory": "product"
+    },
+    {
+      "id": 8,
+      "name": "TEST-DRINK-68089A",
+      "supercategory": "product"
+    },
+    {
+      "id": 9,
+      "name": "SKU-INDOMIE-MIE",
+      "supercategory": "Instant Noodles"
+    },
+    {
+      "id": 10,
+      "name": "SKU-POKKA-GREENTEA",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 11,
+      "name": "TEST-CHOCO-2E7BE9",
+      "supercategory": "product"
+    },
+    {
+      "id": 13,
+      "name": "TEST-DRINK-C891D9",
+      "supercategory": "product"
+    },
+    {
+      "id": 14,
+      "name": "TEST-CHOCO-1BB909",
+      "supercategory": "product"
+    },
+    {
+      "id": 16,
+      "name": "TEST-DRINK-8FB264",
+      "supercategory": "product"
+    },
+    {
+      "id": 17,
+      "name": "TEST-CHOCO-D39BC1",
+      "supercategory": "product"
+    },
+    {
+      "id": 19,
+      "name": "TEST-DRINK-56438C",
+      "supercategory": "product"
+    },
+    {
+      "id": 20,
+      "name": "TEST-CHOCO-384D71",
+      "supercategory": "product"
+    },
+    {
+      "id": 22,
+      "name": "TEST-DRINK-BB5418",
+      "supercategory": "product"
+    },
+    {
+      "id": 23,
+      "name": "TEST-CHOCO-1EA41A",
+      "supercategory": "product"
+    },
+    {
+      "id": 25,
+      "name": "TEST-DRINK-337AE3",
+      "supercategory": "product"
+    },
+    {
+      "id": 26,
+      "name": "TEST-CHOCO-90F7B1",
+      "supercategory": "product"
+    },
+    {
+      "id": 27,
+      "name": "FEWSHOT_7B5054",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 29,
+      "name": "TEST-DRINK-D128FD",
+      "supercategory": "product"
+    },
+    {
+      "id": 30,
+      "name": "FEWSHOT-MATCHA-697C33",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 31,
+      "name": "TEST-CHOCO-A5277D",
+      "supercategory": "product"
+    },
+    {
+      "id": 33,
+      "name": "TEST-DRINK-1B5648",
+      "supercategory": "product"
+    },
+    {
+      "id": 34,
+      "name": "TEST-CHOCO-F6B9BD",
+      "supercategory": "product"
+    },
+    {
+      "id": 35,
+      "name": "FEWSHOT_B5B9E2",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 37,
+      "name": "TEST-DRINK-9CABD4",
+      "supercategory": "product"
+    },
+    {
+      "id": 38,
+      "name": "TEST-CHOCO-BCFFF2",
+      "supercategory": "product"
+    },
+    {
+      "id": 39,
+      "name": "FEWSHOT_3DA97F",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 41,
+      "name": "TEST-DRINK-898A57",
+      "supercategory": "product"
+    },
+    {
+      "id": 42,
+      "name": "TEST-CHOCO-E34F08",
+      "supercategory": "product"
+    },
+    {
+      "id": 43,
+      "name": "FEWSHOT_07FB25",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 45,
+      "name": "TEST-DRINK-165BA8",
+      "supercategory": "product"
+    },
+    {
+      "id": 47,
+      "name": "TEST-CHOCO-C91FBD",
+      "supercategory": "product"
+    },
+    {
+      "id": 49,
+      "name": "FEWSHOT_A553F3",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 52,
+      "name": "TEH-KOTAK",
+      "supercategory": "product"
+    },
+    {
+      "id": 53,
+      "name": "IPHONE",
+      "supercategory": "product"
+    },
+    {
+      "id": 54,
+      "name": "TISU-003",
+      "supercategory": "product"
+    },
+    {
+      "id": 56,
+      "name": "TEST-CHOCO-F9C149",
+      "supercategory": "product"
+    },
+    {
+      "id": 58,
+      "name": "FEWSHOT_EE2A4F",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 60,
+      "name": "TEST-DRINK-98A240",
+      "supercategory": "product"
+    },
+    {
+      "id": 61,
+      "name": "TEST-CHOCO-93CDD0",
+      "supercategory": "product"
+    },
+    {
+      "id": 63,
+      "name": "FEWSHOT_90E186",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 65,
+      "name": "TEST-DRINK-C47A73",
+      "supercategory": "product"
+    },
+    {
+      "id": 67,
+      "name": "TEST-CHOCO-5DC48E",
+      "supercategory": "product"
+    },
+    {
+      "id": 69,
+      "name": "FEWSHOT_74E281",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 71,
+      "name": "TEST-DRINK-0388DE",
+      "supercategory": "product"
+    },
+    {
+      "id": 72,
+      "name": "TEST-CHOCO-B36558",
+      "supercategory": "product"
+    },
+    {
+      "id": 74,
+      "name": "FEWSHOT_AF3263",
+      "supercategory": "Beverages"
+    },
+    {
+      "id": 76,
+      "name": "TEST-DRINK-DDEFDA",
+      "supercategory": "product"
+    }
+  ],
+  "images": [
+    {
+      "id": 78,
+      "file_name": "IPHONE_reference_37b1e15eab.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 53
+    },
+    {
+      "id": 119,
+      "file_name": "train_test-drink-337ae3_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 25
+    },
+    {
+      "id": 120,
+      "file_name": "val_test-drink-337ae3_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 25
+    },
+    {
+      "id": 121,
+      "file_name": "train_test-choco-90f7b1_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 26
+    },
+    {
+      "id": 122,
+      "file_name": "val_test-choco-90f7b1_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 26
+    },
+    {
+      "id": 123,
+      "file_name": "train_fewshot_7b5054_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 27
+    },
+    {
+      "id": 124,
+      "file_name": "val_fewshot_7b5054_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 27
+    },
+    {
+      "id": 125,
+      "file_name": "train_test-drink-d128fd_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 29
+    },
+    {
+      "id": 126,
+      "file_name": "val_test-drink-d128fd_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 29
+    },
+    {
+      "id": 127,
+      "file_name": "train_fewshot-matcha-697c33_bright.jpg",
+      "width": 224,
+      "height": 224,
+      "split": "train",
+      "sku_id": 30
+    },
+    {
+      "id": 128,
+      "file_name": "val_fewshot-matcha-697c33_angle.jpg",
+      "width": 224,
+      "height": 224,
+      "split": "val",
+      "sku_id": 30
+    },
+    {
+      "id": 129,
+      "file_name": "train_test-choco-a5277d_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 31
+    },
+    {
+      "id": 130,
+      "file_name": "val_test-choco-a5277d_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 31
+    },
+    {
+      "id": 131,
+      "file_name": "train_test-drink-1b5648_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 33
+    },
+    {
+      "id": 132,
+      "file_name": "val_test-drink-1b5648_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 33
+    },
+    {
+      "id": 133,
+      "file_name": "train_test-choco-f6b9bd_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 34
+    },
+    {
+      "id": 134,
+      "file_name": "val_test-choco-f6b9bd_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 34
+    },
+    {
+      "id": 135,
+      "file_name": "train_fewshot_b5b9e2_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 35
+    },
+    {
+      "id": 79,
+      "file_name": "IPHONE_reference_447786da2f.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 53
+    },
+    {
+      "id": 82,
+      "file_name": "TISU-003_reference_df595aa140.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 54
+    },
+    {
+      "id": 86,
+      "file_name": "TISU-003_reference_8f3d544cb6.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 54
+    },
+    {
+      "id": 87,
+      "file_name": "train_test-drink-002_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 2
+    },
+    {
+      "id": 88,
+      "file_name": "val_test-drink-002_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 2
+    },
+    {
+      "id": 89,
+      "file_name": "train_test-choco-bar_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 3
+    },
+    {
+      "id": 90,
+      "file_name": "val_test-choco-bar_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 3
+    },
+    {
+      "id": 91,
+      "file_name": "train_test-drink-a024bd_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 5
+    },
+    {
+      "id": 92,
+      "file_name": "val_test-drink-a024bd_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 5
+    },
+    {
+      "id": 93,
+      "file_name": "train_test-choco-fb66c4_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 6
+    },
+    {
+      "id": 94,
+      "file_name": "val_test-choco-fb66c4_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 6
+    },
+    {
+      "id": 95,
+      "file_name": "train_test-drink-68089a_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 8
+    },
+    {
+      "id": 96,
+      "file_name": "val_test-drink-68089a_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 8
+    },
+    {
+      "id": 97,
+      "file_name": "train_sku-indomie-mie_bright.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "train",
+      "sku_id": 9
+    },
+    {
+      "id": 98,
+      "file_name": "val_sku-indomie-mie_angle.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "val",
+      "sku_id": 9
+    },
+    {
+      "id": 99,
+      "file_name": "train_sku-pokka-greentea_bright.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "train",
+      "sku_id": 10
+    },
+    {
+      "id": 100,
+      "file_name": "val_sku-pokka-greentea_angle.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "val",
+      "sku_id": 10
+    },
+    {
+      "id": 101,
+      "file_name": "train_test-choco-2e7be9_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 11
+    },
+    {
+      "id": 102,
+      "file_name": "val_test-choco-2e7be9_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 11
+    },
+    {
+      "id": 103,
+      "file_name": "train_test-drink-c891d9_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 13
+    },
+    {
+      "id": 72,
+      "file_name": "TEH-KOTAK_reference_467de6a103.jpg",
+      "width": 432,
+      "height": 432,
+      "split": "reference",
+      "sku_id": 52
+    },
+    {
+      "id": 73,
+      "file_name": "TEH-KOTAK_reference_298ff0be08.jpg",
+      "width": 473,
+      "height": 473,
+      "split": "reference",
+      "sku_id": 52
+    },
+    {
+      "id": 74,
+      "file_name": "TEH-KOTAK_reference_caff8ebf41.jpg",
+      "width": 414,
+      "height": 414,
+      "split": "reference",
+      "sku_id": 52
+    },
+    {
+      "id": 75,
+      "file_name": "TEH-KOTAK_reference_07ce189485.jpg",
+      "width": 434,
+      "height": 434,
+      "split": "reference",
+      "sku_id": 52
+    },
+    {
+      "id": 80,
+      "file_name": "IPHONE_reference_8dff1fad8e.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 53
+    },
+    {
+      "id": 81,
+      "file_name": "TISU-003_reference_bddfa6af01.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 54
+    },
+    {
+      "id": 84,
+      "file_name": "TISU-003_reference_4d3cc1f32c.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 54
+    },
+    {
+      "id": 85,
+      "file_name": "TISU-003_reference_56962f79a7.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 54
+    },
+    {
+      "id": 136,
+      "file_name": "val_fewshot_b5b9e2_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 35
+    },
+    {
+      "id": 137,
+      "file_name": "train_test-drink-9cabd4_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 37
+    },
+    {
+      "id": 138,
+      "file_name": "val_test-drink-9cabd4_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 37
+    },
+    {
+      "id": 139,
+      "file_name": "train_test-choco-bcfff2_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 38
+    },
+    {
+      "id": 140,
+      "file_name": "val_test-choco-bcfff2_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 38
+    },
+    {
+      "id": 141,
+      "file_name": "train_fewshot_3da97f_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 39
+    },
+    {
+      "id": 142,
+      "file_name": "val_fewshot_3da97f_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 39
+    },
+    {
+      "id": 143,
+      "file_name": "train_test-drink-898a57_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 41
+    },
+    {
+      "id": 144,
+      "file_name": "val_test-drink-898a57_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 41
+    },
+    {
+      "id": 145,
+      "file_name": "train_test-choco-e34f08_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 42
+    },
+    {
+      "id": 17,
+      "file_name": "val_test-drink-a024bd_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 5
+    },
+    {
+      "id": 146,
+      "file_name": "val_test-choco-e34f08_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 42
+    },
+    {
+      "id": 147,
+      "file_name": "train_fewshot_07fb25_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 43
+    },
+    {
+      "id": 148,
+      "file_name": "val_fewshot_07fb25_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 43
+    },
+    {
+      "id": 76,
+      "file_name": "IPHONE_reference_911fa3c64a.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 53
+    },
+    {
+      "id": 83,
+      "file_name": "TISU-003_reference_2e8809d7cb.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 54
+    },
+    {
+      "id": 104,
+      "file_name": "val_test-drink-c891d9_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 13
+    },
+    {
+      "id": 105,
+      "file_name": "train_test-choco-1bb909_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 14
+    },
+    {
+      "id": 1,
+      "file_name": "TEST-DRINK-002_reference_e276fc0749.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 2
+    },
+    {
+      "id": 2,
+      "file_name": "TEST-CHOCO-BAR_reference_f7e97a293c.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 3
+    },
+    {
+      "id": 3,
+      "file_name": "TEST-DRINK-A024BD_reference_5cee24c222.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 5
+    },
+    {
+      "id": 4,
+      "file_name": "TEST-CHOCO-FB66C4_reference_119f9e110e.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 6
+    },
+    {
+      "id": 5,
+      "file_name": "TEST-DRINK-68089A_reference_5e7225f7fd.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 8
+    },
+    {
+      "id": 6,
+      "file_name": "SKU-INDOMIE-MIE_reference_5edf4ea119.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "reference",
+      "sku_id": 9
+    },
+    {
+      "id": 7,
+      "file_name": "SKU-POKKA-GREENTEA_reference_03a58032f5.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "reference",
+      "sku_id": 10
+    },
+    {
+      "id": 8,
+      "file_name": "TEST-CHOCO-2E7BE9_reference_2f930fa961.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 11
+    },
+    {
+      "id": 9,
+      "file_name": "TEST-DRINK-C891D9_reference_73db5ddb74.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 13
+    },
+    {
+      "id": 10,
+      "file_name": "TEST-CHOCO-1BB909_reference_8f64b7ee53.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 14
+    },
+    {
+      "id": 11,
+      "file_name": "TEST-DRINK-8FB264_reference_053bcbbc6e.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 16
+    },
+    {
+      "id": 12,
+      "file_name": "train_test-drink-002_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 2
+    },
+    {
+      "id": 13,
+      "file_name": "val_test-drink-002_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 2
+    },
+    {
+      "id": 14,
+      "file_name": "train_test-choco-bar_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 3
+    },
+    {
+      "id": 15,
+      "file_name": "val_test-choco-bar_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 3
+    },
+    {
+      "id": 16,
+      "file_name": "train_test-drink-a024bd_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 5
+    },
+    {
+      "id": 106,
+      "file_name": "val_test-choco-1bb909_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 14
+    },
+    {
+      "id": 18,
+      "file_name": "train_test-choco-fb66c4_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 6
+    },
+    {
+      "id": 19,
+      "file_name": "val_test-choco-fb66c4_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 6
+    },
+    {
+      "id": 20,
+      "file_name": "train_test-drink-68089a_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 8
+    },
+    {
+      "id": 21,
+      "file_name": "val_test-drink-68089a_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 8
+    },
+    {
+      "id": 22,
+      "file_name": "train_sku-indomie-mie_bright.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "train",
+      "sku_id": 9
+    },
+    {
+      "id": 23,
+      "file_name": "val_sku-indomie-mie_angle.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "val",
+      "sku_id": 9
+    },
+    {
+      "id": 24,
+      "file_name": "train_sku-pokka-greentea_bright.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "train",
+      "sku_id": 10
+    },
+    {
+      "id": 25,
+      "file_name": "val_sku-pokka-greentea_angle.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "val",
+      "sku_id": 10
+    },
+    {
+      "id": 26,
+      "file_name": "train_test-choco-2e7be9_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 11
+    },
+    {
+      "id": 27,
+      "file_name": "val_test-choco-2e7be9_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 11
+    },
+    {
+      "id": 28,
+      "file_name": "train_test-drink-c891d9_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 13
+    },
+    {
+      "id": 29,
+      "file_name": "val_test-drink-c891d9_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 13
+    },
+    {
+      "id": 30,
+      "file_name": "train_test-choco-1bb909_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 14
+    },
+    {
+      "id": 31,
+      "file_name": "val_test-choco-1bb909_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 14
+    },
+    {
+      "id": 32,
+      "file_name": "train_test-drink-8fb264_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 16
+    },
+    {
+      "id": 33,
+      "file_name": "val_test-drink-8fb264_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 16
+    },
+    {
+      "id": 34,
+      "file_name": "hard_neg_tissue.jpg",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "sku_id": null
+    },
+    {
+      "id": 35,
+      "file_name": "hard_neg_fruit_melon.jpg",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "sku_id": null
+    },
+    {
+      "id": 36,
+      "file_name": "hard_neg_hand_holder.jpg",
+      "width": 256,
+      "height": 256,
+      "split": "test",
+      "sku_id": null
+    },
+    {
+      "id": 37,
+      "file_name": "TEST-CHOCO-D39BC1_reference_ca99102755.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 17
+    },
+    {
+      "id": 38,
+      "file_name": "TEST-DRINK-56438C_reference_320ecd3ecf.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 19
+    },
+    {
+      "id": 39,
+      "file_name": "TEST-CHOCO-384D71_reference_3b023da757.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 20
+    },
+    {
+      "id": 40,
+      "file_name": "TEST-DRINK-BB5418_reference_75e7257cbb.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 22
+    },
+    {
+      "id": 41,
+      "file_name": "TEST-CHOCO-1EA41A_reference_0bdf2864a7.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 23
+    },
+    {
+      "id": 42,
+      "file_name": "TEST-DRINK-337AE3_reference_2782c63c47.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 25
+    },
+    {
+      "id": 43,
+      "file_name": "TEST-CHOCO-90F7B1_reference_22745a2f2a.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 26
+    },
+    {
+      "id": 44,
+      "file_name": "FEWSHOT_7B5054_ref_e1d63ca334.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 27
+    },
+    {
+      "id": 45,
+      "file_name": "FEWSHOT_7B5054_ref_ba04feacfd.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 27
+    },
+    {
+      "id": 46,
+      "file_name": "TEST-DRINK-D128FD_reference_79173a1f71.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 29
+    },
+    {
+      "id": 47,
+      "file_name": "FEWSHOT-MATCHA-697C33_ref_53160326d7.jpg",
+      "width": 224,
+      "height": 224,
+      "split": "reference",
+      "sku_id": 30
+    },
+    {
+      "id": 48,
+      "file_name": "FEWSHOT-MATCHA-697C33_ref_d3a7447098.jpg",
+      "width": 224,
+      "height": 224,
+      "split": "reference",
+      "sku_id": 30
+    },
+    {
+      "id": 49,
+      "file_name": "TEST-CHOCO-A5277D_reference_4484ce7aa2.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 31
+    },
+    {
+      "id": 50,
+      "file_name": "TEST-DRINK-1B5648_reference_9d44c2cf56.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 33
+    },
+    {
+      "id": 51,
+      "file_name": "TEST-CHOCO-F6B9BD_reference_19c2e090e3.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 34
+    },
+    {
+      "id": 52,
+      "file_name": "FEWSHOT_B5B9E2_ref_a850746cde.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 35
+    },
+    {
+      "id": 53,
+      "file_name": "FEWSHOT_B5B9E2_ref_e0daed035a.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 35
+    },
+    {
+      "id": 54,
+      "file_name": "TEST-DRINK-9CABD4_reference_742596dd64.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 37
+    },
+    {
+      "id": 55,
+      "file_name": "hardneg_21_tmpotzwi3ap.jpg",
+      "width": 100,
+      "height": 100,
+      "split": "train",
+      "sku_id": null
+    },
+    {
+      "id": 56,
+      "file_name": "TEST-CHOCO-BCFFF2_reference_e5be5466a0.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 38
+    },
+    {
+      "id": 57,
+      "file_name": "FEWSHOT_3DA97F_ref_85d912b146.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 39
+    },
+    {
+      "id": 58,
+      "file_name": "FEWSHOT_3DA97F_ref_f7dfd0d0cc.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 39
+    },
+    {
+      "id": 59,
+      "file_name": "hardneg_31_tmpv04oi7ka.jpg",
+      "width": 100,
+      "height": 100,
+      "split": "train",
+      "sku_id": null
+    },
+    {
+      "id": 60,
+      "file_name": "TEST-DRINK-898A57_reference_23e0ee685d.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 41
+    },
+    {
+      "id": 61,
+      "file_name": "TEST-CHOCO-E34F08_reference_6647c39c22.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 42
+    },
+    {
+      "id": 62,
+      "file_name": "FEWSHOT_07FB25_ref_8acc9d191d.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 43
+    },
+    {
+      "id": 77,
+      "file_name": "IPHONE_reference_0192071817.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "reference",
+      "sku_id": 53
+    },
+    {
+      "id": 107,
+      "file_name": "train_test-drink-8fb264_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 16
+    },
+    {
+      "id": 108,
+      "file_name": "val_test-drink-8fb264_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 16
+    },
+    {
+      "id": 109,
+      "file_name": "train_test-choco-d39bc1_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 17
+    },
+    {
+      "id": 110,
+      "file_name": "val_test-choco-d39bc1_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 17
+    },
+    {
+      "id": 111,
+      "file_name": "train_test-drink-56438c_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 19
+    },
+    {
+      "id": 112,
+      "file_name": "val_test-drink-56438c_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 19
+    },
+    {
+      "id": 113,
+      "file_name": "train_test-choco-384d71_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 20
+    },
+    {
+      "id": 114,
+      "file_name": "val_test-choco-384d71_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 20
+    },
+    {
+      "id": 115,
+      "file_name": "train_test-drink-bb5418_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 22
+    },
+    {
+      "id": 116,
+      "file_name": "val_test-drink-bb5418_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 22
+    },
+    {
+      "id": 117,
+      "file_name": "train_test-choco-1ea41a_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 23
+    },
+    {
+      "id": 118,
+      "file_name": "val_test-choco-1ea41a_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 23
+    },
+    {
+      "id": 251,
+      "file_name": "hardneg_51_tmpurbltq6p.jpg",
+      "width": 100,
+      "height": 100,
+      "split": "train",
+      "sku_id": null
+    },
+    {
+      "id": 252,
+      "file_name": "TEST-DRINK-0388DE_reference_20aae31961.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 71
+    },
+    {
+      "id": 149,
+      "file_name": "train_teh-kotak_bright.jpg",
+      "width": 432,
+      "height": 432,
+      "split": "train",
+      "sku_id": 52
+    },
+    {
+      "id": 150,
+      "file_name": "val_teh-kotak_angle.jpg",
+      "width": 432,
+      "height": 432,
+      "split": "val",
+      "sku_id": 52
+    },
+    {
+      "id": 151,
+      "file_name": "train_iphone_bright.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "train",
+      "sku_id": 53
+    },
+    {
+      "id": 152,
+      "file_name": "val_iphone_angle.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "val",
+      "sku_id": 53
+    },
+    {
+      "id": 153,
+      "file_name": "train_tisu-003_bright.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "train",
+      "sku_id": 54
+    },
+    {
+      "id": 154,
+      "file_name": "val_tisu-003_angle.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "val",
+      "sku_id": 54
+    },
+    {
+      "id": 155,
+      "file_name": "TEST-CHOCO-F9C149_reference_fe547841ba.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 56
+    },
+    {
+      "id": 157,
+      "file_name": "FEWSHOT_EE2A4F_ref_b132b0ade6.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 58
+    },
+    {
+      "id": 158,
+      "file_name": "FEWSHOT_EE2A4F_ref_3d75fd5f3c.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 58
+    },
+    {
+      "id": 159,
+      "file_name": "hardneg_43_tmp20sjesv4.jpg",
+      "width": 100,
+      "height": 100,
+      "split": "train",
+      "sku_id": null
+    },
+    {
+      "id": 160,
+      "file_name": "TEST-DRINK-98A240_reference_b2b2142f74.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 60
+    },
+    {
+      "id": 161,
+      "file_name": "TEST-CHOCO-93CDD0_reference_34c98d71a3.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 61
+    },
+    {
+      "id": 163,
+      "file_name": "FEWSHOT_90E186_ref_cddb9c97dd.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 63
+    },
+    {
+      "id": 164,
+      "file_name": "FEWSHOT_90E186_ref_1a43801758.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 63
+    },
+    {
+      "id": 165,
+      "file_name": "hardneg_47_tmpr0t9mv5p.jpg",
+      "width": 100,
+      "height": 100,
+      "split": "train",
+      "sku_id": null
+    },
+    {
+      "id": 166,
+      "file_name": "TEST-DRINK-C47A73_reference_6e15459703.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 65
+    },
+    {
+      "id": 167,
+      "file_name": "train_test-drink-002_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 2
+    },
+    {
+      "id": 168,
+      "file_name": "val_test-drink-002_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 2
+    },
+    {
+      "id": 169,
+      "file_name": "train_test-choco-bar_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 3
+    },
+    {
+      "id": 170,
+      "file_name": "val_test-choco-bar_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 3
+    },
+    {
+      "id": 171,
+      "file_name": "train_test-drink-a024bd_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 5
+    },
+    {
+      "id": 172,
+      "file_name": "val_test-drink-a024bd_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 5
+    },
+    {
+      "id": 173,
+      "file_name": "train_test-choco-fb66c4_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 6
+    },
+    {
+      "id": 174,
+      "file_name": "val_test-choco-fb66c4_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 6
+    },
+    {
+      "id": 175,
+      "file_name": "train_test-drink-68089a_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 8
+    },
+    {
+      "id": 176,
+      "file_name": "val_test-drink-68089a_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 8
+    },
+    {
+      "id": 177,
+      "file_name": "train_sku-indomie-mie_bright.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "train",
+      "sku_id": 9
+    },
+    {
+      "id": 178,
+      "file_name": "val_sku-indomie-mie_angle.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "val",
+      "sku_id": 9
+    },
+    {
+      "id": 179,
+      "file_name": "train_sku-pokka-greentea_bright.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "train",
+      "sku_id": 10
+    },
+    {
+      "id": 180,
+      "file_name": "val_sku-pokka-greentea_angle.jpg",
+      "width": 400,
+      "height": 400,
+      "split": "val",
+      "sku_id": 10
+    },
+    {
+      "id": 181,
+      "file_name": "train_test-choco-2e7be9_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 11
+    },
+    {
+      "id": 182,
+      "file_name": "val_test-choco-2e7be9_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 11
+    },
+    {
+      "id": 183,
+      "file_name": "train_test-drink-c891d9_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 13
+    },
+    {
+      "id": 184,
+      "file_name": "val_test-drink-c891d9_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 13
+    },
+    {
+      "id": 185,
+      "file_name": "train_test-choco-1bb909_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 14
+    },
+    {
+      "id": 186,
+      "file_name": "val_test-choco-1bb909_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 14
+    },
+    {
+      "id": 187,
+      "file_name": "train_test-drink-8fb264_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 16
+    },
+    {
+      "id": 188,
+      "file_name": "val_test-drink-8fb264_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 16
+    },
+    {
+      "id": 189,
+      "file_name": "train_test-choco-d39bc1_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 17
+    },
+    {
+      "id": 190,
+      "file_name": "val_test-choco-d39bc1_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 17
+    },
+    {
+      "id": 191,
+      "file_name": "train_test-drink-56438c_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 19
+    },
+    {
+      "id": 192,
+      "file_name": "val_test-drink-56438c_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 19
+    },
+    {
+      "id": 193,
+      "file_name": "train_test-choco-384d71_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 20
+    },
+    {
+      "id": 194,
+      "file_name": "val_test-choco-384d71_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 20
+    },
+    {
+      "id": 195,
+      "file_name": "train_test-drink-bb5418_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 22
+    },
+    {
+      "id": 196,
+      "file_name": "val_test-drink-bb5418_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 22
+    },
+    {
+      "id": 197,
+      "file_name": "train_test-choco-1ea41a_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 23
+    },
+    {
+      "id": 198,
+      "file_name": "val_test-choco-1ea41a_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 23
+    },
+    {
+      "id": 199,
+      "file_name": "train_test-drink-337ae3_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 25
+    },
+    {
+      "id": 200,
+      "file_name": "val_test-drink-337ae3_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 25
+    },
+    {
+      "id": 201,
+      "file_name": "train_test-choco-90f7b1_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 26
+    },
+    {
+      "id": 202,
+      "file_name": "val_test-choco-90f7b1_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 26
+    },
+    {
+      "id": 203,
+      "file_name": "train_fewshot_7b5054_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 27
+    },
+    {
+      "id": 204,
+      "file_name": "val_fewshot_7b5054_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 27
+    },
+    {
+      "id": 205,
+      "file_name": "train_test-drink-d128fd_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 29
+    },
+    {
+      "id": 206,
+      "file_name": "val_test-drink-d128fd_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 29
+    },
+    {
+      "id": 207,
+      "file_name": "train_fewshot-matcha-697c33_bright.jpg",
+      "width": 224,
+      "height": 224,
+      "split": "train",
+      "sku_id": 30
+    },
+    {
+      "id": 208,
+      "file_name": "val_fewshot-matcha-697c33_angle.jpg",
+      "width": 224,
+      "height": 224,
+      "split": "val",
+      "sku_id": 30
+    },
+    {
+      "id": 209,
+      "file_name": "train_test-choco-a5277d_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 31
+    },
+    {
+      "id": 210,
+      "file_name": "val_test-choco-a5277d_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 31
+    },
+    {
+      "id": 211,
+      "file_name": "train_test-drink-1b5648_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 33
+    },
+    {
+      "id": 212,
+      "file_name": "val_test-drink-1b5648_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 33
+    },
+    {
+      "id": 213,
+      "file_name": "train_test-choco-f6b9bd_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 34
+    },
+    {
+      "id": 214,
+      "file_name": "val_test-choco-f6b9bd_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 34
+    },
+    {
+      "id": 215,
+      "file_name": "train_fewshot_b5b9e2_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 35
+    },
+    {
+      "id": 216,
+      "file_name": "val_fewshot_b5b9e2_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 35
+    },
+    {
+      "id": 217,
+      "file_name": "train_test-drink-9cabd4_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 37
+    },
+    {
+      "id": 218,
+      "file_name": "val_test-drink-9cabd4_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 37
+    },
+    {
+      "id": 219,
+      "file_name": "train_test-choco-bcfff2_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 38
+    },
+    {
+      "id": 220,
+      "file_name": "val_test-choco-bcfff2_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 38
+    },
+    {
+      "id": 221,
+      "file_name": "train_fewshot_3da97f_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 39
+    },
+    {
+      "id": 222,
+      "file_name": "val_fewshot_3da97f_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 39
+    },
+    {
+      "id": 223,
+      "file_name": "train_test-drink-898a57_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 41
+    },
+    {
+      "id": 224,
+      "file_name": "val_test-drink-898a57_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 41
+    },
+    {
+      "id": 225,
+      "file_name": "train_test-choco-e34f08_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 42
+    },
+    {
+      "id": 226,
+      "file_name": "val_test-choco-e34f08_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 42
+    },
+    {
+      "id": 227,
+      "file_name": "train_fewshot_07fb25_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 43
+    },
+    {
+      "id": 228,
+      "file_name": "val_fewshot_07fb25_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 43
+    },
+    {
+      "id": 229,
+      "file_name": "train_teh-kotak_bright.jpg",
+      "width": 432,
+      "height": 432,
+      "split": "train",
+      "sku_id": 52
+    },
+    {
+      "id": 230,
+      "file_name": "val_teh-kotak_angle.jpg",
+      "width": 432,
+      "height": 432,
+      "split": "val",
+      "sku_id": 52
+    },
+    {
+      "id": 231,
+      "file_name": "train_iphone_bright.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "train",
+      "sku_id": 53
+    },
+    {
+      "id": 232,
+      "file_name": "val_iphone_angle.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "val",
+      "sku_id": 53
+    },
+    {
+      "id": 233,
+      "file_name": "train_tisu-003_bright.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "train",
+      "sku_id": 54
+    },
+    {
+      "id": 234,
+      "file_name": "val_tisu-003_angle.jpg",
+      "width": 1920,
+      "height": 1080,
+      "split": "val",
+      "sku_id": 54
+    },
+    {
+      "id": 235,
+      "file_name": "train_test-choco-f9c149_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 56
+    },
+    {
+      "id": 236,
+      "file_name": "val_test-choco-f9c149_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 56
+    },
+    {
+      "id": 237,
+      "file_name": "train_fewshot_ee2a4f_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 58
+    },
+    {
+      "id": 238,
+      "file_name": "val_fewshot_ee2a4f_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 58
+    },
+    {
+      "id": 239,
+      "file_name": "train_test-drink-98a240_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 60
+    },
+    {
+      "id": 240,
+      "file_name": "val_test-drink-98a240_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 60
+    },
+    {
+      "id": 241,
+      "file_name": "train_test-choco-93cdd0_bright.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "train",
+      "sku_id": 61
+    },
+    {
+      "id": 242,
+      "file_name": "val_test-choco-93cdd0_angle.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "val",
+      "sku_id": 61
+    },
+    {
+      "id": 243,
+      "file_name": "train_fewshot_90e186_bright.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "train",
+      "sku_id": 63
+    },
+    {
+      "id": 244,
+      "file_name": "val_fewshot_90e186_angle.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "val",
+      "sku_id": 63
+    },
+    {
+      "id": 245,
+      "file_name": "train_test-drink-c47a73_bright.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "train",
+      "sku_id": 65
+    },
+    {
+      "id": 246,
+      "file_name": "val_test-drink-c47a73_angle.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "val",
+      "sku_id": 65
+    },
+    {
+      "id": 247,
+      "file_name": "TEST-CHOCO-5DC48E_reference_30d9209a98.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 67
+    },
+    {
+      "id": 249,
+      "file_name": "FEWSHOT_74E281_ref_adc5435d4c.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 69
+    },
+    {
+      "id": 250,
+      "file_name": "FEWSHOT_74E281_ref_395f9a925d.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 69
+    },
+    {
+      "id": 253,
+      "file_name": "TEST-CHOCO-B36558_reference_a021914e49.jpg",
+      "width": 320,
+      "height": 320,
+      "split": "reference",
+      "sku_id": 72
+    },
+    {
+      "id": 255,
+      "file_name": "FEWSHOT_AF3263_ref_e79a7e71e8.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 74
+    },
+    {
+      "id": 256,
+      "file_name": "FEWSHOT_AF3263_ref_a6b9658073.jpg",
+      "width": 200,
+      "height": 200,
+      "split": "reference",
+      "sku_id": 74
+    },
+    {
+      "id": 257,
+      "file_name": "hardneg_55_tmpewefuxq9.jpg",
+      "width": 100,
+      "height": 100,
+      "split": "train",
+      "sku_id": null
+    },
+    {
+      "id": 258,
+      "file_name": "TEST-DRINK-DDEFDA_reference_f9b5de3169.jpg",
+      "width": 300,
+      "height": 300,
+      "split": "reference",
+      "sku_id": 76
+    }
+  ],
+  "annotations": [
+    {
+      "id": 1,
+      "image_id": 1,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 2,
+      "image_id": 3,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 3,
+      "image_id": 5,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 4,
+      "image_id": 9,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 5,
+      "image_id": 11,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 6,
+      "image_id": 38,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 7,
+      "image_id": 40,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 8,
+      "image_id": 42,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 9,
+      "image_id": 46,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 10,
+      "image_id": 50,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 11,
+      "image_id": 54,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 12,
+      "image_id": 60,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 13,
+      "image_id": 252,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 14,
+      "image_id": 160,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 15,
+      "image_id": 166,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    },
+    {
+      "id": 16,
+      "image_id": 258,
+      "category_id": 2,
+      "bbox": [
+        45,
+        45,
+        164,
+        164
+      ],
+      "area": 26896.0,
+      "iscrowd": 0,
+      "confidence": 1.0,
+      "source": "manual"
+    }
+  ]
+}

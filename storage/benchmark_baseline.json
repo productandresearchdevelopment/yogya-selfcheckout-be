@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-10-12 16:44:50",
+  "hardware": {
+    "cpu_cores": 12,
+    "ram_total_gb": 7.73,
+    "ram_available_gb": 0.4,
+    "device": "cpu",
+    "torch_version": "2.14.1+cpu"
+  },
+  "models": {
+    "detector": "fasterrcnn-pretrained-baseline",
+    "embedder": "mobilenetv3-pretrained-baseline",
+    "embedding_dim": 960
+  },
+  "benchmarks": {
+    "detector_init_ms": 0.0,
+    "embedder_init_ms": 525.7,
+    "detector_warmup_ms": 1791.12,
+    "detector_mean_ms": 882.61,
+    "detector_median_ms": 841.82,
+    "detector_p95_ms": 1034.61,
+    "embedding_warmup_ms": 160.43,
+    "embedding_single_mean_ms": 75.03,
+    "embedding_4crop_sequential_mean_ms": 300.36,
+    "gallery_search_db_mean_ms": 3.92,
+    "e2e_pipeline_mean_ms": 874.6,
+    "sustained_fps": 1.14,
+    "ram_initial_mb": 298.79,
+    "ram_final_mb": 365.77,
+    "ram_delta_mb": 66.98
+  }
+}
