@@ -74,7 +74,8 @@ def get_dino_embedder(variant: str = "dinov2_vits14"):
     # Check for DINOv3 variant request
     if "dinov3" in variant:
         import os
-        checkpoint_env = os.environ.get("DINOV3_CHECKPOINT_PATH")
+        from app.core.config import DINOV3_CHECKPOINT_PATH
+        checkpoint_env = DINOV3_CHECKPOINT_PATH or os.environ.get("DINOV3_CHECKPOINT_PATH")
         hf_token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
 
         if checkpoint_env and os.path.exists(checkpoint_env):
@@ -130,32 +131,28 @@ def get_dino_embedder(variant: str = "dinov2_vits14"):
     return model, _device, transform
 
 
-class BaselineEmbedder:
+class DINOv3InitializationError(RuntimeError):
     """
-    Visual Embedding Pipeline.
-    Supports either the baseline pretrained MobileNetV3 (960-dim)
-    or any active fine-tuned checkpoint from ModelRegistry (e.g. 512-dim).
+    Raised explicitly when official Meta DINOv3 weights cannot be initialized,
+    strictly prohibiting silent fallback to MobileNetV3 or DINOv2.
+    """
+    pass
+
+
+class DINOv3Embedder:
+    """
+    Primary SKU Visual Feature Extractor using Meta DINOv3 Vision Transformer.
+    Generates 384-dimensional L2-normalized visual embeddings on unit hypersphere.
+    Guarantees consistent preprocessing and explicit error handling when weights are unavailable.
     """
 
-    def __init__(self, model_id: Optional[str] = None, db_session=None):
-        self.model_id = model_id or "mobilenetv3-pretrained-baseline"
+    def __init__(self, variant: str = "dinov3_vits16"):
+        self.variant = variant
+        self.model_id = f"{variant}-baseline"
+        self._embedding_dim = 384 if "vits" in variant.lower() else 768
         self._model = None
         self._device = None
         self._transform = None
-        self._embedding_dim = 960
-
-        if db_session:
-            try:
-                from app.services.model_registry_service import get_active_model, load_model_instance
-                active = get_active_model(db_session, model_type="embedding")
-                self.model_id = active.model_id
-                self._embedding_dim = active.embedding_dim
-                self._model, self._device, self._transform = load_model_instance(active)
-            except Exception as e:
-                # Fallback to baseline if registry lookup fails
-                print(f"Warning: Could not load active model from registry ({e}), using baseline.")
-                self.model_id = "mobilenetv3-pretrained-baseline"
-                self._embedding_dim = 960
 
     @property
     def model_name(self) -> str:
@@ -167,19 +164,19 @@ class BaselineEmbedder:
 
     def _ensure_loaded(self):
         if self._model is None:
-            if "dino" in self.model_id.lower():
-                variant = "dinov2_vitb14" if "vitb" in self.model_id.lower() else "dinov2_vits14"
-                if "dinov3" in self.model_id.lower():
-                    variant = "dinov3_vitb16" if "vitb" in self.model_id.lower() else "dinov3_vits16"
-                self._model, self._device, self._transform = get_dino_embedder(variant=variant)
-                self._embedding_dim = 768 if "vitb" in self.model_id.lower() else 384
-            else:
-                self._model, self._device, self._transform = get_embedder()
-                self._embedding_dim = 960
+            try:
+                self._model, self._device, self._transform = get_dino_embedder(variant=self.variant)
+            except Exception as e:
+                raise DINOv3InitializationError(
+                    f"DINOv3 initialization failed for '{self.variant}': {str(e)}. "
+                    "Silent fallback to MobileNetV3 or DINOv2 is prohibited per architectural requirements. "
+                    "To initialize DINOv3, specify local weights via DINOV3_CHECKPOINT_PATH or provide HF_TOKEN."
+                ) from e
 
     def extract_embedding_from_crop(self, pil_crop: Image.Image) -> np.ndarray:
         """
-        Preprocesses a PIL Image crop and returns a 1D L2-normalized float32 numpy vector.
+        Preprocesses a PIL Image crop (224x224 RGB ImageNet-normalized)
+        and returns a 1D L2-normalized float32 numpy vector (384-dim).
         """
         self._ensure_loaded()
         rgb_img = pil_crop.convert("RGB")
@@ -202,7 +199,7 @@ class BaselineEmbedder:
     def extract_embeddings_batched(self, pil_crops: List[Image.Image]) -> np.ndarray:
         """
         Preprocesses a batch of PIL Image crops and returns a 2D (B, D) L2-normalized float32 numpy array.
-        Significantly reduces inference latency by executing a single batched neural forward pass.
+        Executes a single batched neural forward pass for high-throughput frame processing.
         """
         if not pil_crops:
             return np.empty((0, self._embedding_dim), dtype=np.float32)
@@ -217,13 +214,104 @@ class BaselineEmbedder:
             features = self._model(tensors)
             features = features.cpu().numpy().astype(np.float32)
 
-        # Ensure 2D shape (B, D)
         if features.ndim == 1:
             features = features.reshape(1, -1)
         elif features.ndim > 2:
             features = features.reshape(features.shape[0], -1)
 
         # Batch L2 Normalization
+        norms = np.linalg.norm(features, axis=1, keepdims=True)
+        features = np.where(norms > 1e-12, features / norms, np.zeros_like(features))
+
+        return features
+
+    def extract_embedding_from_file(self, image_path: str) -> np.ndarray:
+        """Loads image from disk and extracts embedding."""
+        with Image.open(image_path) as img:
+            return self.extract_embedding_from_crop(img)
+
+
+class BaselineEmbedder:
+    """
+    Visual Embedding Pipeline adapter for backwards compatibility.
+    Strictly configured to use DINOv3 as the primary active embedding model without silent fallback.
+    """
+
+    def __init__(self, model_id: Optional[str] = None, db_session=None):
+        self.model_id = model_id or "dinov3-vits16-baseline"
+        self._model = None
+        self._device = None
+        self._transform = None
+        self._embedding_dim = 384
+
+        if db_session:
+            from app.services.model_registry_service import get_active_model, load_model_instance
+            active = get_active_model(db_session, model_type="embedding")
+            self.model_id = active.model_id
+            self._embedding_dim = active.embedding_dim
+            # Explicit load without silent fallback
+            self._model, self._device, self._transform = load_model_instance(active)
+
+    @property
+    def model_name(self) -> str:
+        return self.model_id
+
+    @property
+    def embedding_dim(self) -> int:
+        return self._embedding_dim
+
+    def _ensure_loaded(self):
+        if self._model is None:
+            if "dinov3" in self.model_id.lower():
+                variant = "dinov3_vitb16" if "vitb" in self.model_id.lower() else "dinov3_vits16"
+                self._model, self._device, self._transform = get_dino_embedder(variant=variant)
+                self._embedding_dim = 768 if "vitb" in self.model_id.lower() else 384
+            elif "dinov2" in self.model_id.lower():
+                variant = "dinov2_vitb14" if "vitb" in self.model_id.lower() else "dinov2_vits14"
+                self._model, self._device, self._transform = get_dino_embedder(variant=variant)
+                self._embedding_dim = 768 if "vitb" in self.model_id.lower() else 384
+            else:
+                self._model, self._device, self._transform = get_embedder()
+                self._embedding_dim = 960
+
+    def extract_embedding_from_crop(self, pil_crop: Image.Image) -> np.ndarray:
+        """Preprocesses a PIL Image crop and returns a 1D L2-normalized float32 numpy vector."""
+        self._ensure_loaded()
+        rgb_img = pil_crop.convert("RGB")
+        tensor_img = self._transform(rgb_img).unsqueeze(0).to(self._device)
+
+        with torch.no_grad():
+            features = self._model(tensor_img)
+            features = features.squeeze().cpu().numpy().astype(np.float32)
+
+        norm = np.linalg.norm(features)
+        if norm > 1e-12:
+            features = features / norm
+        else:
+            features = np.zeros_like(features)
+
+        return features
+
+    def extract_embeddings_batched(self, pil_crops: List[Image.Image]) -> np.ndarray:
+        """Preprocesses a batch of PIL Image crops and returns a 2D (B, D) L2-normalized float32 numpy array."""
+        if not pil_crops:
+            return np.empty((0, self._embedding_dim), dtype=np.float32)
+
+        if len(pil_crops) == 1:
+            return self.extract_embedding_from_crop(pil_crops[0]).reshape(1, -1)
+
+        self._ensure_loaded()
+        tensors = torch.stack([self._transform(c.convert("RGB")) for c in pil_crops]).to(self._device)
+
+        with torch.no_grad():
+            features = self._model(tensors)
+            features = features.cpu().numpy().astype(np.float32)
+
+        if features.ndim == 1:
+            features = features.reshape(1, -1)
+        elif features.ndim > 2:
+            features = features.reshape(features.shape[0], -1)
+
         norms = np.linalg.norm(features, axis=1, keepdims=True)
         features = np.where(norms > 1e-12, features / norms, np.zeros_like(features))
 

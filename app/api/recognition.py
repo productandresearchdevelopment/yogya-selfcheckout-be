@@ -31,9 +31,9 @@ from app.schemas.recognition import (
     RecognitionLogSummary,
     RecognitionStatusSummary,
 )
-from app.services.detector import BaselineDetector
-from app.services.embedder import BaselineEmbedder
-from app.services.gallery import GalleryService
+from app.services.detector import BaselineDetector, ObjectDetector
+from app.services.embedder import BaselineEmbedder, DINOv3Embedder, DINOv3InitializationError
+from app.services.gallery import GalleryService, OpenSetDecision, SKUReferenceGallery, SKUMatcher
 from app.services.model_registry_service import get_active_model
 
 router = APIRouter(prefix="/recognition", tags=["Recognition"])
@@ -67,7 +67,13 @@ def execute_recognition_pipeline(
     allow_fallback: bool = True,
     save_crops: bool = False,
 ) -> Tuple[List[DetectedObject], str, Optional[str], float, bool, List[str], str, str]:
-    active_embedder, active_model_id, embedding_dim = get_active_embedder(db)
+    try:
+        active_embedder, active_model_id, embedding_dim = get_active_embedder(db)
+    except DINOv3InitializationError as dino_err:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=str(dino_err),
+        )
 
     raw_detections, is_fallback, warnings = baseline_detector.detect_and_crop(
         image_path,

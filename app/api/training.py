@@ -36,11 +36,13 @@ def get_readiness_report(db: Session = Depends(get_db)):
 @router.post("/seed-samples")
 def seed_dataset_samples(db: Session = Depends(get_db)):
     """
-    Utility endpoint to augment registered SKUs into verified train/val splits
-    and generate sample hard negatives (tissue, fruits, hands) for metric learning validation.
+    Disabled in DINOv3 Few-Shot Architecture.
+    Pretrained foundation model operates directly on enrolled reference photos without synthetic dataset generation.
     """
-    res = seed_sample_training_dataset(db)
-    return res
+    raise HTTPException(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        detail="Synthetic training dataset seeding is disabled. DINOv3 Few-Shot architecture uses genuine reference photos directly without retraining.",
+    )
 
 
 @router.post("/jobs", response_model=TrainingJobResponse, status_code=status.HTTP_201_CREATED)

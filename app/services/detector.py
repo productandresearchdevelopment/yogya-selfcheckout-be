@@ -25,6 +25,15 @@ COCO_CLASSES = [
     "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush"
 ]
 
+# Non-retail categories that should not be localized as products on a scanning counter
+NON_RETAIL_CLASSES = {
+    "person", "bed", "couch", "chair", "dining table", "toilet",
+    "bench", "sink", "traffic light", "fire hydrant", "stop sign",
+    "parking meter", "train", "bus", "airplane", "boat", "bicycle",
+    "car", "motorcycle", "truck", "bird", "cat", "dog", "horse",
+    "sheep", "cow", "elephant", "bear", "zebra", "giraffe"
+}
+
 _detector_model = None
 _device = None
 
@@ -211,6 +220,15 @@ class BaselineDetector:
             norm_y_max = y2 / img_h
 
             class_name = COCO_CLASSES[label_idx] if label_idx < len(COCO_CLASSES) else f"class_{label_idx}"
+
+            # Filter out humans, furniture, and non-retail background classes
+            if class_name in NON_RETAIL_CLASSES:
+                continue
+
+            # Filter out giant bounding boxes covering almost the entire frame (> 85% area)
+            area_ratio = (px_w * px_h) / (img_w * img_h)
+            if area_ratio > 0.85:
+                continue
 
             # Extract crop
             crop = pil_img.crop((x1, y1, x2, y2))
@@ -405,3 +423,7 @@ def check_retail_annotation_readiness(db) -> Dict[str, Any]:
             if not is_ready else "Annotation dataset meets minimum threshold for detector fine-tuning."
         ),
     }
+
+
+# Architectural alias per Refactor Specification
+ObjectDetector = BaselineDetector

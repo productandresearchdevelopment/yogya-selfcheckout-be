@@ -15,7 +15,7 @@ import sys
 sys.path.insert(0, str(BACKEND_DIR))
 
 from app.core.database import SessionLocal, engine
-from app.core.config import ORIGINAL_IMAGES_DIR, CROPPED_IMAGES_DIR, CHECKPOINTS_DIR, EXPORTS_DIR
+from app.core.config import ORIGINAL_IMAGES_DIR, CROPPED_IMAGES_DIR, CHECKPOINTS_DIR, EXPORTS_DIR, EMBEDDING_MODEL_NAME
 from app.services.gallery import invalidate_gallery_cache
 from app.services.model_registry_service import ensure_baseline_models_registered
 
@@ -56,15 +56,17 @@ def reset_database_and_storage():
             );
         """
         db.execute(text(delete_models_sql))
-        # Ensure active baselines
-        db.execute(text("UPDATE model_registry SET is_active = TRUE WHERE model_id = 'mobilenetv3-pretrained-baseline';"))
-        db.execute(text("UPDATE model_registry SET is_active = FALSE WHERE model_id = 'dinov2-vits14-baseline';"))
-        db.execute(text("UPDATE model_registry SET is_active = TRUE WHERE model_id = 'fasterrcnn-pretrained-baseline';"))
         db.commit()
 
-        # Re-verify baselines
+        # Re-verify baselines exist
         ensure_baseline_models_registered(db)
-        print("      Model registry reset to standard baseline models.")
+
+        # Ensure active baselines
+        db.execute(text("UPDATE model_registry SET is_active = FALSE WHERE model_type = 'embedding';"))
+        db.execute(text(f"UPDATE model_registry SET is_active = TRUE WHERE model_id = '{EMBEDDING_MODEL_NAME}';"))
+        db.execute(text("UPDATE model_registry SET is_active = TRUE WHERE model_id = 'fasterrcnn-pretrained-baseline';"))
+        db.commit()
+        print(f"      Model registry reset to standard baseline models (active embedding: {EMBEDDING_MODEL_NAME}).")
 
         # 3. Clean up storage files (original images, crops, exports, checkpoints)
         print("[3/5] Cleaning storage directories...")

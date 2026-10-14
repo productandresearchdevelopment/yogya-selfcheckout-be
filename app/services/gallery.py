@@ -381,3 +381,93 @@ class GalleryService:
             )
             results.append(res)
         return results
+
+
+class OpenSetDecision:
+    """
+    Open-Set Decision Engine:
+    Evaluates top similarity score against similarity threshold and top-1/top-2 margin delta
+    against margin threshold to classify detection into KNOWN, AMBIGUOUS, or UNKNOWN.
+    """
+
+    @staticmethod
+    def evaluate(
+        candidates: List[Dict[str, Any]],
+        similarity_threshold: float,
+        margin_threshold: float = 0.0,
+        active_model_version: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        if not candidates:
+            return {
+                "is_unknown": True,
+                "recognition_status": "UNKNOWN",
+                "predicted_sku": "UNKNOWN",
+                "predicted_sku_name": "No candidates available",
+                "top_similarity_score": 0.0,
+                "margin_threshold": margin_threshold,
+                "margin_delta": None,
+                "rejection_reason": "No candidates available for comparison.",
+                "active_model_version": active_model_version,
+                "candidates": [],
+            }
+
+        top_candidate = candidates[0]
+        top_score = top_candidate["similarity_score"]
+        margin_delta = (
+            round(candidates[0]["similarity_score"] - candidates[1]["similarity_score"], 4)
+            if len(candidates) > 1 else None
+        )
+
+        if top_score < similarity_threshold:
+            return {
+                "is_unknown": True,
+                "recognition_status": "UNKNOWN",
+                "predicted_sku": "UNKNOWN",
+                "predicted_sku_name": f"UNKNOWN (Best Match: {top_candidate['sku_code']})",
+                "top_similarity_score": top_score,
+                "margin_threshold": margin_threshold,
+                "margin_delta": margin_delta,
+                "rejection_reason": (
+                    f"Top cosine similarity ({top_score:.3f}) is below the required acceptance threshold "
+                    f"({similarity_threshold:.3f})."
+                ),
+                "active_model_version": active_model_version,
+                "candidates": candidates,
+            }
+
+        if margin_threshold > 0.0 and len(candidates) > 1:
+            if margin_delta is not None and margin_delta < margin_threshold:
+                return {
+                    "is_unknown": True,
+                    "recognition_status": "AMBIGUOUS",
+                    "predicted_sku": "AMBIGUOUS",
+                    "predicted_sku_name": f"AMBIGUOUS (Close Match: {top_candidate['sku_code']} vs {candidates[1]['sku_code']})",
+                    "top_similarity_score": top_score,
+                    "margin_threshold": margin_threshold,
+                    "margin_delta": margin_delta,
+                    "rejection_reason": (
+                        f"Top candidate '{top_candidate['sku_code']}' similarity ({top_score:.3f}) does not exceed "
+                        f"second candidate '{candidates[1]['sku_code']}' ({candidates[1]['similarity_score']:.3f}) "
+                        f"by required margin {margin_threshold:.3f} (delta: {margin_delta:.3f})."
+                    ),
+                    "active_model_version": active_model_version,
+                    "candidates": candidates,
+                }
+
+        return {
+            "is_unknown": False,
+            "recognition_status": "KNOWN",
+            "predicted_sku": top_candidate["sku_code"],
+            "predicted_sku_name": top_candidate["sku_name"],
+            "top_similarity_score": top_score,
+            "margin_threshold": margin_threshold,
+            "margin_delta": margin_delta,
+            "rejection_reason": None,
+            "active_model_version": active_model_version,
+            "candidates": candidates,
+        }
+
+
+# Architectural aliases per Refactor Specification
+SKUReferenceGallery = GalleryService
+SKUMatcher = GalleryService

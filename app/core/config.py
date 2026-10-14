@@ -69,9 +69,16 @@ DEFAULT_TOP_K = int(os.getenv("DEFAULT_TOP_K", "5"))
 
 # Baseline Model Names
 DETECTOR_MODEL_NAME = "fasterrcnn_mobilenet_v3_large_fpn"
-EMBEDDING_MODEL_NAME = "mobilenet_v3_large"
-EMBEDDING_DIM = 960  # MobileNetV3-Large feature dim before classification head
+EMBEDDING_MODEL_NAME = "dinov3-vits16-baseline"
+EMBEDDING_DIM = 384  # DINOv3 ViT-S/16 feature dimension
 
 # DINO Configuration
-DINOV3_CHECKPOINT_PATH = os.getenv("DINOV3_CHECKPOINT_PATH")
+_checkpoint_env = os.getenv("DINOV3_CHECKPOINT_PATH")
+if _checkpoint_env:
+    _p = Path(_checkpoint_env)
+    DINOV3_CHECKPOINT_PATH = str(_p if _p.is_absolute() else (BACKEND_DIR / _p).resolve())
+else:
+    _default_ckpt = CHECKPOINTS_DIR / "dinov3_vits16.pth"
+    DINOV3_CHECKPOINT_PATH = str(_default_ckpt.resolve()) if _default_ckpt.exists() else None
+
 HF_TOKEN = os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_HUB_TOKEN")
